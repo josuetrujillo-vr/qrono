@@ -1,0 +1,31 @@
+project_id = "checador"
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+[db]
+port = 54322
+major_version = 17
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+[studio]
+enabled = true
+port = 54323
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://127.0.0.1:5173"]
+enable_signup = false
+minimum_password_length = 6
+[auth.email]
+enable_signup = false
+enable_confirmations = false
+[functions.qr-token]
+verify_jwt = false
+[functions.checkin]
+verify_jwt = false
+[functions.admin-members]
+verify_jwt = false
