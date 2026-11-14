@@ -1,0 +1,6 @@
+# Configuración remota mínima: los ajustes no declarados se conservan.
+project_id = "qrono"
+[auth]
+site_url = "https://qrono.pages.dev"
+enable_signup = false
+minimum_password_length = 6

@@ -25,7 +25,10 @@ enable_signup = false
 enable_confirmations = false
 [functions.qr-token]
 verify_jwt = false
+import_map = "./functions/deno.json"
 [functions.checkin]
 verify_jwt = false
+import_map = "./functions/deno.json"
 [functions.admin-members]
 verify_jwt = false
+import_map = "./functions/deno.json"

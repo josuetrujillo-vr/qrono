@@ -12,7 +12,8 @@
     "test:sql": "node scripts/test-sql.mjs",
     "check:edge": "deno check --config supabase/functions/deno.json supabase/functions/qr-token/index.ts supabase/functions/checkin/index.ts supabase/functions/admin-members/index.ts",
     "test:e2e": "playwright test",
-    "check:secrets": "node scripts/check-secrets.mjs"
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "deploy:pages": "npm run build && npx --yes wrangler@4.162.0 pages deploy dist --project-name qrono --branch main --force"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.119.0",

@@ -1,4 +1,38 @@
-# Publicar Qrono en tus cuentas
+# Despliegue de Qrono
+
+## Instalación publicada
+
+La aplicación ya está en **https://qrono.pages.dev**. Se instaló la migración `202611140001_core.sql` y las tres funciones en el proyecto Supabase indicado abajo, sin seed demo. Auth tiene registro público deshabilitado y URL del sitio `https://qrono.pages.dev`; otros ajustes se conservaron.
+
+Pages usa **subida directa**: la integración GitHub respondió con el error 8000011 sobre su instalación Git. Por ello, un push a GitHub **no publica automáticamente la web**. Desde esta computadora, con las variables de producción en `.env.production.local` (ignorado por Git):
+
+```powershell
+npx wrangler login
+npm run deploy:pages
+```
+
+El script compila y publica con `wrangler@4.162.0 pages deploy dist --project-name qrono --branch main --force`. En esta versión, `--force` elige Pages clásico y evita delegar a Workers; no cambia Git ni la base. Encuentra el proyecto en Cloudflare → Workers & Pages → qrono.
+
+El archivo privado de compilación contiene `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` y `VITE_APP_URL=https://qrono.pages.dev`. No lo subas a Git. Las variables públicas también están guardadas en Pages, pero la compilación de subida directa usa las locales.
+
+La configuración remota mínima está en `deploy/supabase/config.toml`. Para revisarla y aplicarla:
+
+```powershell
+npx supabase config diff --workdir deploy --remote=ehvbnwqeedqylblsjxpr
+npx supabase config push --workdir deploy --remote=ehvbnwqeedqylblsjxpr --yes
+```
+
+El segundo comando se ejecuta solo después de revisar el diff. Las funciones declaran el mapa compartido de imports. Para actualizarlas sin Docker:
+
+```powershell
+npx supabase functions deploy qr-token checkin admin-members --remote=ehvbnwqeedqylblsjxpr --import-map supabase/functions/deno.json --use-api --yes
+```
+
+El acceso inicial del administrador se entregó en un archivo privado bajo `.local/`, excluido de Git. El correo sintético es solo un identificador y no recibe mensajes. Conserva la contraseña en privado. Antes del uso real, reemplaza los documentos REVISAR CON ABOGADO y agrega empleados/quioscos desde Administración.
+
+## Alternativa futura: integración Git
+
+Los pasos siguientes son para crear **otro proyecto** con despliegue automático, después de autorizar la aplicación GitHub de Cloudflare. El proyecto actual de subida directa no se convierte a Git; usa una URL nueva y actualiza el origen permitido en Supabase si eliges esta alternativa.
 
 Repositorio: https://github.com/josuetrujillo-vr/qrono
 

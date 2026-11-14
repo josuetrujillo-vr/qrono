@@ -62,15 +62,17 @@ El script crea la organización, secreto QR, propietario, documentos placeholder
 
 ## Despliegue
 
-1. Cree un proyecto gratuito de Supabase y vincúlelo: `npx supabase login` y `npx supabase link --project-ref SU_REFERENCIA`.
-2. Aplique las migraciones con `npx supabase db push`. **No ejecute el seed demo en producción.**
-3. Aplique la configuración Auth mediante `npx supabase config push`: mínimo 6 caracteres, registro público deshabilitado y `site_url` del dominio real. Revise los cambios de configuración antes de aplicarlos a un proyecto existente.
-4. Configure `APP_URL` con `npx supabase secrets set APP_URL=https://SU_APP.pages.dev`. Supabase ya proporciona sus claves internas. No configure secretos en Cloudflare.
-5. Despliegue `npx supabase functions deploy qr-token`, `checkin` y `admin-members`.
-6. En Cloudflare Pages use `npm ci && npm run build`, salida `dist`, Node 22, y solo `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_APP_URL`. El subdominio pages.dev permite evitar pagar un dominio propio. `_headers` y `_redirects` se copian al artefacto.
-7. Ejecute el bootstrap y pruebe los criterios de aceptación con dos empresas y cuentas reales de prueba. Verifique las cabeceras desde el dominio publicado.
+Esta instalación está publicada en https://qrono.pages.dev y utiliza el proyecto Supabase `ehvbnwqeedqylblsjxpr`. Consulta `docs/DESPLIEGUE.md` para actualizarla.
 
-La CSP permite conexiones a `*.supabase.co`. Si usa un dominio personalizado para Supabase, añada exactamente ese origen a `connect-src`. Para desarrollo, Vite no aplica `_headers`.
+Pages se publica directamente con Wrangler; los pushes a GitHub no despliegan automáticamente. Con las variables públicas de compilación en `.env.production.local` (ignorado por Git) y la sesión Cloudflare autorizada:
+
+```powershell
+npm run deploy:pages
+```
+
+La configuración remota mínima de Auth vive en `deploy/supabase/config.toml`. Usa `npx supabase config diff --workdir deploy --remote=ehvbnwqeedqylblsjxpr` antes de aplicar cambios. No subas la configuración local con URLs localhost a producción. No ejecutes seed ni db reset en el servidor.
+
+La CSP permite conexiones a `*.supabase.co`. Para un dominio personalizado de Supabase, añade exactamente ese origen a `connect-src`. Vite no aplica `_headers` durante desarrollo.
 
 ## Quiosco en tablet
 
