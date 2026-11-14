@@ -14,10 +14,21 @@ jobs:
       - run: npm run check:edge
   database:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: supabase/setup-cli@v1
-        with: {version: latest}
-      - run: supabase start
-      - run: supabase db reset
-      - run: psql 'postgresql://postgres:postgres@127.0.0.1:54322/postgres' -v ON_ERROR_STOP=1 -f supabase/tests/database.sql
+      - uses: supabase/setup-cli@v3
+        with: {version: '3.1.0'}
+      - name: Configurar base aislada de CI
+        run: |
+          # 15432 evita el rango de puertos efímeros habitual del runner.
+          # El cambio solo existe en este checkout temporal de Actions.
+          sed -i 's/project_id = "checador"/project_id = "qrono-ci"/; s/port = 54322/port = 15432/' supabase/config.toml
+          sysctl net.ipv4.ip_local_port_range
+      - name: Iniciar PostgreSQL y aplicar migraciones y seed locales
+        run: supabase db start
+      - name: Verificar integridad, inmutabilidad y RLS
+        run: psql 'postgresql://postgres:postgres@127.0.0.1:15432/postgres' -v ON_ERROR_STOP=1 -f supabase/tests/database.sql
+      - name: Detener la base de CI
+        if: always()
+        run: supabase stop --no-backup
