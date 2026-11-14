@@ -18,14 +18,14 @@ El archivo privado de compilación contiene `VITE_SUPABASE_URL`, `VITE_SUPABASE_
 La configuración remota mínima está en `deploy/supabase/config.toml`. Para revisarla y aplicarla:
 
 ```powershell
-npx supabase config diff --workdir deploy --remote=ehvbnwqeedqylblsjxpr
-npx supabase config push --workdir deploy --remote=ehvbnwqeedqylblsjxpr --yes
+npx supabase config diff --workdir deploy --remote=TU_REFERENCIA
+npx supabase config push --workdir deploy --remote=TU_REFERENCIA --yes
 ```
 
 El segundo comando se ejecuta solo después de revisar el diff. Las funciones declaran el mapa compartido de imports. Para actualizarlas sin Docker:
 
 ```powershell
-npx supabase functions deploy qr-token checkin admin-members --remote=ehvbnwqeedqylblsjxpr --import-map supabase/functions/deno.json --use-api --yes
+npx supabase functions deploy qr-token checkin admin-members --remote=TU_REFERENCIA --import-map supabase/functions/deno.json --use-api --yes
 ```
 
 El acceso inicial del administrador se entregó en un archivo privado bajo `.local/`, excluido de Git. El correo sintético es solo un identificador y no recibe mensajes. Conserva la contraseña en privado. Antes del uso real, reemplaza los documentos REVISAR CON ABOGADO y agrega empleados/quioscos desde Administración.
@@ -36,7 +36,7 @@ Los pasos siguientes son para crear **otro proyecto** con despliegue automático
 
 Repositorio: https://github.com/josuetrujillo-vr/qrono
 
-Proyecto Supabase: `ehvbnwqeedqylblsjxpr` · https://ehvbnwqeedqylblsjxpr.supabase.co
+La referencia y URL reales del proyecto se mantienen en la configuración local y en el entorno de despliegue. Los ejemplos usan `TU_REFERENCIA`.
 
 La URL y la referencia del proyecto son públicas. Las claves no se guardan en este repositorio. No introduzcas la service role ni un token de administración en Cloudflare Pages o en variables VITE_.
 
@@ -52,7 +52,7 @@ La URL y la referencia del proyecto son públicas. Las claves no se guardan en e
 | Variable | Valor |
 |---|---|
 | `NODE_VERSION` | `22` |
-| `VITE_SUPABASE_URL` | `https://ehvbnwqeedqylblsjxpr.supabase.co` |
+| `VITE_SUPABASE_URL` | `https://TU_REFERENCIA.supabase.co` |
 | `VITE_SUPABASE_ANON_KEY` | Clave anon o publishable de este proyecto, desde Supabase → Settings → API Keys |
 | `VITE_APP_URL` | URL definitiva que asigne Pages, por ejemplo `https://qrono.pages.dev` si está disponible |
 
@@ -67,7 +67,7 @@ En una terminal privada, desde este proyecto:
 
 ```powershell
 npx supabase login
-npx supabase link --project-ref ehvbnwqeedqylblsjxpr
+npx supabase link --project-ref TU_REFERENCIA
 npx supabase db push --dry-run
 ```
 
@@ -78,9 +78,9 @@ Después de verificar la migración:
 ```powershell
 npx supabase db push
 npx supabase secrets set APP_URL=https://URL_DEFINITIVA.pages.dev
-npx supabase functions deploy qr-token --project-ref ehvbnwqeedqylblsjxpr
-npx supabase functions deploy checkin --project-ref ehvbnwqeedqylblsjxpr
-npx supabase functions deploy admin-members --project-ref ehvbnwqeedqylblsjxpr
+npx supabase functions deploy qr-token --project-ref TU_REFERENCIA
+npx supabase functions deploy checkin --project-ref TU_REFERENCIA
+npx supabase functions deploy admin-members --project-ref TU_REFERENCIA
 ```
 
 La plataforma inyecta sus claves internas en las funciones. En Auth configura la URL del sitio con el origen definitivo, registro público deshabilitado y mínimo de contraseña 6 para los PIN. Conserva intactos otros ajustes de un proyecto existente: no uses `config push` con el archivo local, que contiene URLs localhost.

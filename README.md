@@ -62,7 +62,7 @@ El script crea la organización, secreto QR, propietario, documentos placeholder
 
 ## Despliegue
 
-Esta instalación está publicada en https://qrono.pages.dev y utiliza el proyecto Supabase `ehvbnwqeedqylblsjxpr`. Consulta `docs/DESPLIEGUE.md` para actualizarla.
+La aplicación está publicada en https://qrono.pages.dev. Consulta `docs/DESPLIEGUE.md` para actualizarla.
 
 Pages se publica directamente con Wrangler; los pushes a GitHub no despliegan automáticamente. Con las variables públicas de compilación en `.env.production.local` (ignorado por Git) y la sesión Cloudflare autorizada:
 
@@ -70,7 +70,7 @@ Pages se publica directamente con Wrangler; los pushes a GitHub no despliegan au
 npm run deploy:pages
 ```
 
-La configuración remota mínima de Auth vive en `deploy/supabase/config.toml`. Usa `npx supabase config diff --workdir deploy --remote=ehvbnwqeedqylblsjxpr` antes de aplicar cambios. No subas la configuración local con URLs localhost a producción. No ejecutes seed ni db reset en el servidor.
+La configuración remota mínima de Auth vive en `deploy/supabase/config.toml`. Usa `npx supabase config diff --workdir deploy --remote` antes de aplicar cambios. No subas la configuración local con URLs localhost a producción. No ejecutes seed ni db reset en el servidor.
 
 La CSP permite conexiones a `*.supabase.co`. Para un dominio personalizado de Supabase, añade exactamente ese origen a `connect-src`. Vite no aplica `_headers` durante desarrollo.
 
