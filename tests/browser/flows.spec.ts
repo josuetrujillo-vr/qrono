@@ -62,5 +62,5 @@ test('administración navega por personas, registros, reportes y configuración'
 });
 test('login móvil sin desbordamientos',async({page})=>{
  await page.setViewportSize({width:390,height:844});await setup(page);await page.goto('/login');await expect(page.getByRole('button',{name:'Iniciar sesión',exact:true})).toBeVisible();
- expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);await page.screenshot({path:'.local/login-mobile.png',fullPage:true});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);await expect(page).toHaveTitle('Qrono · Registro de jornada');await expect(page.locator('.brand')).toContainText('qrono');await page.screenshot({path:'.local/login-mobile.png',fullPage:true});
 });

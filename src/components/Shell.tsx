@@ -10,7 +10,7 @@ export default function Shell() {
     ['/admin', 'Resumen', LayoutDashboard], ['/admin/empleados', 'Personas', Users], ['/admin/registros', 'Registros', ListChecks],
     ['/admin/reportes', 'Reportes', ChartNoAxesCombined], ['/admin/configuracion', 'Configuración', Settings],
   ] as const : [['/', 'Mi jornada', ScanLine], ['/historial', 'Historial', History]] as const;
-  return <div className="app-shell"><aside className="sidebar"><NavLink className="brand" to={admin ? '/admin' : '/'}><span className="brand-icon"><Clock3 size={24} /></span>checador<span className="brand-dot">.</span></NavLink>
+  return <div className="app-shell"><aside className="sidebar"><NavLink className="brand" to={admin ? '/admin' : '/'}><span className="brand-icon"><Clock3 size={24} /></span>qrono<span className="brand-dot">.</span></NavLink>
     <div className="org-label"><span className="eyebrow">CENTRO DE TRABAJO</span><strong>{org?.name}</strong></div>
     <nav aria-label="Navegación principal">{items.map(([to, label, Icon]) => <NavLink key={to} to={to} end={to === '/' || to === '/admin'}><Icon size={20} />{label}</NavLink>)}</nav>
     <div className="sidebar-bottom"><div className="avatar">{member?.full_name.slice(0, 1)}</div><div><strong>{member?.full_name}</strong><small>{admin ? 'Administración' : `Empleado ${member?.employee_number}`}</small></div>

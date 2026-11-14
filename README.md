@@ -1,4 +1,4 @@
-# Checador
+# Qrono
 
 MVP de registro de jornada para equipos pequeños: React/TypeScript, Supabase Auth, PostgreSQL, Edge Functions y hosting estático. Interfaz en español. No incorpora biometría, geolocalización, cola offline ni cálculo legal de horas extra.
 

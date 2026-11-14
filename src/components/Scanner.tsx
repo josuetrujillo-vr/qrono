@@ -12,7 +12,7 @@ export default function Scanner({ close }: { close: () => void }) {
         if (found) return;
         try { const url = new URL(text); if (url.origin !== window.location.origin || url.pathname !== '/c' || !url.searchParams.get('t')) throw new Error();
           found = true; navigate('/c?t=' + encodeURIComponent(url.searchParams.get('t')!));
-        } catch { setError('Este QR no es de su checador. Escanee el código del quiosco.'); }
+        } catch { setError('Este QR no pertenece a Qrono. Escanee el código del quiosco.'); }
       }, () => {});
       if (disposed && scanner.isScanning) await scanner.stop();
     }).catch(() => { if (!disposed) setError('No se pudo abrir la cámara. Revise el permiso o use la cámara de su teléfono para abrir el QR.'); });

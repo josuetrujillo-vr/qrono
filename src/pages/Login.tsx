@@ -21,7 +21,7 @@ export default function Login() {
     if (tab === 'employee') { try { localStorage.setItem('empresa', normalizedSlug); } catch { /* almacenamiento opcional */ } }
     navigate(next ?? '/', { replace: true });
   });
-  return <div className="login-layout"><section className="login-story"><div className="brand light"><span className="brand-icon"><Clock3 size={26} /></span>checador<span className="brand-dot">.</span></div>
+  return <div className="login-layout"><section className="login-story"><div className="brand light"><span className="brand-icon"><Clock3 size={26} /></span>qrono<span className="brand-dot">.</span></div>
     <div className="story-content"><p className="eyebrow">SU TIEMPO, BIEN REGISTRADO</p><h1>Empiece su día.<br />Deje su marca.</h1><p>Un registro claro de cada entrada y salida, para usted y su equipo.</p>
     <div className="story-receipt"><span className="story-line"><ScanLine size={23} />Del quiosco a su teléfono</span><span className="story-dashes" /><div><span>ENTRADA / SALIDA</span><ShieldCheck size={22} /></div><strong>Con hora del servidor<br />y comprobante de cada marca.</strong></div></div><small>Sin biometría. Sin ubicación. Con claridad.</small></section>
     <section className="login-form"><div className="login-form-inner"><p className="eyebrow">BIENVENIDO A SU JORNADA</p><h2>Iniciar sesión</h2><p className="muted">Use los datos que le proporcionó su empresa.</p>
